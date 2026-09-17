@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HairDaisy - เครื่องประดับผมน่ารัก</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F472B6;
+    --pink-light: #FDE8F3;
+    --pink-pale: #FFF0F8;
+    --pink-dark: #E91E8C;
+    --peach: #FBBF84;
+    --mint: #A8E6CF;
+    --mint-dark: #5FBFA0;
+    --cream: #FFF8F0;
+    --gold: #F4C842;
+    --text: #4A2040;
+    --text-light: #8B5070;
+    --white: #FFFFFF;
+    --shadow: 0 4px 20px rgba(244,114,182,0.15);
+    --shadow-hover: 0 8px 30px rgba(244,114,182,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: linear-gradient(90deg, #F8B4D9 0%, #FDE8F3 50%, #C8F0E8 100%);
+    padding: 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(244,114,182,0.2);
+  }
+
+  .topbar-left { display: flex; gap: 24px; align-items: center; }
+  .topbar-left span { display: flex; align-items: center; gap: 6px; }
+  .topbar-left span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); display: inline-block; }
+  .topbar-right { display: flex; gap: 16px; align-items: center; }
+  .topbar-right a { color: var(--text-light); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 4px; }
+  .topbar-right a:hover { color: var(--pink-dark); }
+  .social-icons { display: flex; gap: 8px; }
+  .social-icons a { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; text-decoration: none; color: white; }
+  .social-line { background: #00B900; }
+  .social-fb { background: #1877F2; }
+  .social-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+  /* NAV */
+  nav {
+    background: white;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 2px 12px rgba(244,114,182,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Mitr', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--pink-dark);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+
+  .logo span {
+    font-size: 11px;
+    display: block;
+    color: var(--text-light);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: -4px;
+    font-family: 'Sarabun', sans-serif;
+  }
+
+  .nav-links { display: flex; gap: 4px; flex: 1; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--pink-pale); color: var(--pink-dark); }
+  .nav-links a.active { color: var(--pink-dark); font-weight: 600; }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: var(--pink-pale);
+    border-radius: 24px;
+    padding: 8px 16px;
+    gap: 8px;
+    border: 1.5px solid transparent;
+    transition: border 0.2s;
+  }
+  .nav-search:focus-within { border-color: var(--pink); }
+  .nav-search input { border: none; background: transparent; outline: none; font-size: 14px; font-family: 'Sarabun'; color: var(--text); width: 180px; }
+  .nav-search input::placeholder { color: var(--text-light); }
+  .nav-search button { background: none; border: none; cursor: pointer; color: var(--pink); font-size: 16px; }
+
+  .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .nav-action-btn { text-decoration: none; color: var(--text-light); font-size: 14px; display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 12px; transition: all 0.2s; }
+  .nav-action-btn:hover { color: var(--pink-dark); background: var(--pink-pale); }
+
+  .cart-btn {
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-family: 'Sarabun';
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .cart-btn:hover { background: var(--pink-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .cart-badge { background: var(--gold); color: var(--text); border-radius: 50%; width: 18px; height: 18px; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+  /* LAYOUT */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #FFF0F8 0%, #FEE2F4 40%, #F0FFF8 100%);
+    border-radius: 24px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 300px;
+    overflow: hidden;
+    position: relative;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(168,230,207,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content { max-width: 340px; z-index: 1; }
+  .hero-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .hero-title .highlight { color: var(--pink-dark); }
+  .hero-subtitle { font-size: 15px; color: var(--text-light); margin-bottom: 24px; }
+
+  .hero-btns { display: flex; gap: 12px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-family: 'Sarabun';
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(233,30,140,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,30,140,0.4); }
+  .btn-outline {
+    background: white;
+    color: var(--pink-dark);
+    border: 1.5px solid var(--pink);
+    border-radius: 24px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-family: 'Sarabun';
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--pink-pale); }
+
+  .hero-image {
+    width: 300px;
+    height: 240px;
+    background: linear-gradient(135deg, #F8D7EA 0%, #E8F5F0 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-girls {
+    display: flex;
+    gap: -20px;
+    align-items: flex-end;
+  }
+
+  .girl {
+    width: 70px;
+    height: 120px;
+    border-radius: 50% 50% 20px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .girl-head {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .girl-body {
+    width: 52px;
+    height: 70px;
+    border-radius: 26px 26px 10px 10px;
+  }
+
+  .hair-accessory {
+    position: absolute;
+    top: -8px;
+    font-size: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* SLIDES DOTS */
+  .slide-dots { display: flex; gap: 6px; margin-top: 20px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(233,30,140,0.2); cursor: pointer; transition: all 0.2s; }
+  .dot.active { background: var(--pink-dark); width: 20px; border-radius: 4px; }
+
+  /* CATEGORIES */
+  .categories {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .categories::-webkit-scrollbar { display: none; }
+
+  .cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.2s;
+  }
+  .cat-item:hover { transform: translateY(-3px); }
+  .cat-item:hover .cat-icon { background: linear-gradient(135deg, #FDE8F3, #E8F5F0); box-shadow: var(--shadow-hover); }
+
+  .cat-icon {
+    width: 72px;
+    height: 72px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  .cat-name { font-size: 12px; color: var(--text-light); text-align: center; font-weight: 500; }
+
+  /* PROMO BANNER */
+  .promo-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .promo-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  .promo-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .promo-icon { font-size: 28px; flex-shrink: 0; }
+  .promo-text { font-size: 13px; }
+  .promo-text strong { display: block; color: var(--pink-dark); font-size: 14px; margin-bottom: 2px; }
+
+  /* PRODUCTS */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 0 16px;
+  }
+  .section-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .see-all { color: var(--pink-dark); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .see-all:hover { text-decoration: underline; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.25s;
+    animation: fadeInUp 0.6s ease backwards;
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--pink-dark);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .product-add-btn {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    width: 32px; height: 32px;
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(244,114,182,0.4);
+  }
+  .product-card:hover .product-add-btn { opacity: 1; }
+  .product-add-btn:hover { background: var(--pink-dark); transform: scale(1.1); }
+
+  .product-info { padding: 12px 14px; }
+  .product-name { font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .product-price { font-size: 15px; color: var(--pink-dark); font-weight: 600; font-family: 'Mitr', sans-serif; }
+  .product-stars { color: #FFB800; font-size: 11px; margin-top: 4px; }
+  .product-reviews { color: var(--text-light); font-size: 11px; }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  .cart-widget {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .cart-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--pink-pale);
+  }
+  .cart-item:last-child { border-bottom: none; }
+
+  .cart-item-img {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .cart-item-price { font-size: 13px; color: var(--pink-dark); font-weight: 600; font-family: 'Mitr', sans-serif; }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .qty-btn {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--pink-light);
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    transition: all 0.2s;
+  }
+  .qty-btn:hover { border-color: var(--pink); color: var(--pink-dark); background: var(--pink-pale); }
+  .qty-num { font-size: 13px; font-weight: 600; min-width: 20px; text-align: center; }
+  .remove-btn { background: none; border: none; cursor: pointer; color: var(--text-light); font-size: 14px; transition: color 0.2s; }
+  .remove-btn:hover { color: #EF4444; }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 16px;
+    font-size: 15px;
+  }
+  .cart-total span:first-child { color: var(--text-light); }
+  .cart-total strong { font-family: 'Mitr', sans-serif; font-size: 20px; color: var(--text); }
+
+  .btn-checkout {
+    width: 100%;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 13px;
+    font-size: 15px;
+    font-family: 'Sarabun';
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 15px rgba(233,30,140,0.3);
+  }
+  .btn-checkout:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,140,0.4); }
+
+  .btn-view-cart {
+    width: 100%;
+    background: white;
+    color: var(--pink-dark);
+    border: 1.5px solid var(--pink-light);
+    border-radius: 14px;
+    padding: 11px;
+    font-size: 14px;
+    font-family: 'Sarabun';
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-view-cart:hover { background: var(--pink-pale); border-color: var(--pink); }
+
+  /* REVIEWS */
+  .reviews-widget {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .widget-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .widget-title a { font-size: 13px; font-weight: 400; color: var(--text-light); text-decoration: none; }
+  .widget-title a:hover { color: var(--pink-dark); }
+
+  .review-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .review-img {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FDE8F3, #E8F5F0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .review-content { flex: 1; }
+  .review-stars { color: #FFB800; font-size: 13px; }
+  .review-text { font-size: 13px; color: var(--text); line-height: 1.5; margin: 4px 0; }
+  .review-author { font-size: 12px; color: var(--text-light); }
+
+  .review-nav { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+  .review-nav-btn {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--pink-light);
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .review-nav-btn:hover { border-color: var(--pink); color: var(--pink-dark); background: var(--pink-pale); }
+
+  /* NEWSLETTER */
+  .newsletter-widget {
+    background: linear-gradient(135deg, #FFF0F8, #F0FFF8);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .newsletter-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .newsletter-input {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .newsletter-input input {
+    flex: 1;
+    border: 1.5px solid var(--pink-light);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: 'Sarabun';
+    outline: none;
+    background: white;
+    transition: border 0.2s;
+  }
+  .newsletter-input input:focus { border-color: var(--pink); }
+  .newsletter-input input::placeholder { color: var(--text-light); }
+  .newsletter-input button {
+    background: var(--mint-dark);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  .newsletter-input button:hover { background: #4AAE8C; }
+
+  .social-follow { display: flex; justify-content: center; gap: 10px; }
+  .social-follow-label { font-size: 13px; color: var(--text-light); text-align: center; margin-bottom: 10px; }
+  .social-follow a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s;
+    font-weight: 700;
+  }
+  .social-follow a:hover { transform: scale(1.15); }
+
+  /* PRODUCT COLORS */
+  .p1 { background: linear-gradient(135deg, #FDE8F3, #FBBFDF); }
+  .p2 { background: linear-gradient(135deg, #FEF3E2, #FBBF84); }
+  .p3 { background: linear-gradient(135deg, #E8F5F0, #A8E6CF); }
+  .p4 { background: linear-gradient(135deg, #FDE8F3, #F8B4D9); }
+  .p5 { background: linear-gradient(135deg, #F3F0FE, #C4B5FD); }
+
+  .c1 { background: linear-gradient(135deg, #FDE8F3, #FBBFDF); }
+  .c2 { background: linear-gradient(135deg, #FEF3E2, #FBBF84); }
+  .c3 { background: linear-gradient(135deg, #E8F5F0, #A8E6CF); }
+
+  /* SPARKLE */
+  .sparkle { display: inline-block; animation: sparkle 1.5s ease infinite; }
+  @keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.7; transform: scale(1.2) rotate(20deg); }
+  }
+
+  /* RESPONSIVE TWEAKS */
+  @media (max-width: 900px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>จัดส่งฟรี เมื่อสั่งซื้อครบ 299.-</span>
+    <span>สมัครสมาชิก รับส่วนลดทันที 10%</span>
+  </div>
+  <div class="topbar-right">
+    <a href="#">📍 ติดตามพัสดุ</a>
+    <a href="#">❓ ช่วยเหลือ</a>
+    <a href="#">✉️ ติดต่อเรา</a>
+    <div class="social-icons">
+      <a href="#" class="social-line">L</a>
+      <a href="#" class="social-fb">f</a>
+      <a href="#" class="social-ig">📷</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">HairDaisy<span>เครื่องประดับผมน่ารัก</span></a>
+  <div class="nav-links">
+    <a href="#" class="active">🏠 หน้าแรก</a>
+    <a href="#">🛍️ สินค้าทั้งหมด</a>
+    <a href="#">🎁 โปรโมชั่น</a>
+    <a href="#">⭐ รีวิวลูกค้า</a>
+    <a href="#">ℹ️ เกี่ยวกับเรา</a>
+    <a href="#">📞 ติดต่อเรา</a>
+  </div>
+  <div class="nav-search">
+    <input type="text" placeholder="ค้นหาสินค้า...">
+    <button>🔍</button>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="nav-action-btn">👤 เข้าสู่ระบบ</a>
+    <button class="cart-btn">
+      🛒 ตะกร้า
+      <span class="cart-badge">3</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+  <!-- CONTENT AREA -->
+  <div>
+    <!-- HERO BANNER -->
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-title">
+          เครื่องประดับผม<br>
+          <span class="highlight">น่ารักสไตล์เกาหลี</span> <span class="sparkle">✨</span>
+        </div>
+        <p class="hero-subtitle">ครบทุกแบบ สำหรับทุกลุคของคุณ</p>
+        <div class="hero-btns">
+          <button class="btn-primary">ช้อปสินค้าเลย</button>
+          <button class="btn-outline">ดูโปรโมชั่น</button>
+        </div>
+        <div class="slide-dots" style="margin-top: 20px;">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div class="hero-image" style="background: linear-gradient(135deg, #FDE8F3 0%, #E8F5F0 100%); border-radius: 20px; width: 280px; height: 220px;">
+        <!-- Illustrated girls with hair accessories -->
+        <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" width="280" height="220">
+          <!-- Girl 1 - pink hair -->
+          <ellipse cx="50" cy="80" rx="28" ry="30" fill="#F8B4D9"/>
+          <circle cx="50" cy="62" r="20" fill="#FBBF84"/>
+          <ellipse cx="50" cy="50" rx="22" ry="14" fill="#E91E8C"/>
+          <!-- bow on top -->
+          <ellipse cx="42" cy="42" rx="8" ry="5" fill="#F472B6" transform="rotate(-20 42 42)"/>
+          <ellipse cx="58" cy="42" rx="8" ry="5" fill="#F472B6" transform="rotate(20 58 42)"/>
+          <circle cx="50" cy="44" r="4" fill="#E91E8C"/>
+          <!-- face -->
+          <circle cx="44" cy="63" r="2" fill="#4A2040"/>
+          <circle cx="56" cy="63" r="2" fill="#4A2040"/>
+          <path d="M46,70 Q50,73 54,70" stroke="#4A2040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Girl 2 - dark hair -->
+          <ellipse cx="110" cy="78" rx="30" ry="32" fill="#A8E6CF"/>
+          <circle cx="110" cy="58" r="22" fill="#8B6347"/>
+          <ellipse cx="110" cy="46" rx="24" ry="16" fill="#2D1B00"/>
+          <!-- clip -->
+          <rect x="118" y="44" width="18" height="6" rx="3" fill="#F4C842"/>
+          <rect x="119" y="45" width="16" height="4" rx="2" fill="#FFD700"/>
+          <!-- face -->
+          <circle cx="103" cy="60" r="2.5" fill="#4A2040"/>
+          <circle cx="117" cy="60" r="2.5" fill="#4A2040"/>
+          <path d="M106,67 Q110,71 114,67" stroke="#4A2040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Girl 3 - light pink/blonde hair -->
+          <ellipse cx="170" cy="82" rx="30" ry="34" fill="#FEE2F4"/>
+          <circle cx="170" cy="60" r="22" fill="#FBBF84"/>
+          <ellipse cx="170" cy="46" rx="24" ry="18" fill="#F8E6C0"/>
+          <!-- scrunchie -->
+          <ellipse cx="156" cy="52" rx="10" ry="6" fill="#F472B6" transform="rotate(-30 156 52)"/>
+          <circle cx="158" cy="50" r="5" fill="#E91E8C" opacity="0.7"/>
+          <!-- face -->
+          <circle cx="163" cy="61" r="2.5" fill="#4A2040"/>
+          <circle cx="177" cy="61" r="2.5" fill="#4A2040"/>
+          <path d="M166,68 Q170,72 174,68" stroke="#4A2040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="163" cy="67" r="4" fill="#F8B4D9" opacity="0.5"/>
+          <circle cx="177" cy="67" r="4" fill="#F8B4D9" opacity="0.5"/>
+
+          <!-- Girl 4 - black hair -->
+          <ellipse cx="230" cy="80" rx="28" ry="30" fill="#FDE8F3"/>
+          <circle cx="230" cy="62" r="20" fill="#5C4B3B"/>
+          <ellipse cx="230" cy="48" rx="24" ry="18" fill="#1A0A00"/>
+          <!-- headband -->
+          <path d="M210,55 Q230,45 250,55" stroke="#F472B6" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <circle cx="218" cy="50" r="4" fill="#F472B6"/>
+          <circle cx="242" cy="50" r="4" fill="#F472B6"/>
+          <!-- face -->
+          <circle cx="224" cy="63" r="2.5" fill="#4A2040"/>
+          <circle cx="236" cy="63" r="2.5" fill="#4A2040"/>
+          <path d="M227,70 Q230,73 233,70" stroke="#4A2040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Decorative sparkles -->
+          <text x="80" y="30" font-size="14" fill="#F4C842">✦</text>
+          <text x="195" y="22" font-size="10" fill="#F472B6">✦</text>
+          <text x="260" y="55" font-size="12" fill="#A8E6CF">✦</text>
+          <text x="10" y="110" font-size="10" fill="#F4C842">✦</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+      <div class="cat-item">
+        <div class="cat-icon">📎</div>
+        <span class="cat-name">กิ๊บติดผม</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">🪢</div>
+        <span class="cat-name">ยางรัดผม</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">🪮</div>
+        <span class="cat-name">หวีและแปรง</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">👑</div>
+        <span class="cat-name">ที่คาดผม</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">🎀</div>
+        <span class="cat-name">โบว์ & เครื่องประดับ</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon" style="background: linear-gradient(135deg, #FFF0F8, #FEE2F4);">🏷️</div>
+        <span class="cat-name">สินค้าลดราคา</span>
+      </div>
+    </div>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner">
+      <div class="promo-item">
+        <span class="promo-icon">🚚</span>
+        <div class="promo-text">
+          <strong>จัดส่งฟรี</strong>
+          เมื่อสั่งซื้อครบ 299.-
+        </div>
+      </div>
+      <div class="promo-item">
+        <span class="promo-icon">🎫</span>
+        <div class="promo-text">
+          <strong>รับส่วนลด 10%</strong>
+          เมื่อสมัครสมาชิก
+        </div>
+      </div>
+      <div class="promo-item">
+        <span class="promo-icon">🎁</span>
+        <div class="promo-text">
+          <strong>โปรพิเศษทุกสัปดาห์</strong>
+          อย่าพลาดความน่ารัก
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="section-header">
+      <div class="section-title">✨ สินค้าแนะนำ ✨</div>
+      <a href="#" class="see-all">ดูทั้งหมด →</a>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card" style="animation-delay: 0.1s;">
+        <div class="product-img p1">
+          <span>📎</span>
+          <span class="product-badge">NEW</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บติดผมไข่มุก</div>
+          <div class="product-price">฿59</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(123)</span></div>
+        </div>
+      </div>
+
+      <div class="product-card" style="animation-delay: 0.15s;">
+        <div class="product-img p2">
+          <span>🪢</span>
+          <span class="product-badge">NEW</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">ยางรัดผมผ้าซาติน</div>
+          <div class="product-price">฿39</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(98)</span></div>
+        </div>
+      </div>
+
+      <div class="product-card" style="animation-delay: 0.2s;">
+        <div class="product-img p3">
+          <span>🎀</span>
+          <span class="product-badge">NEW</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บโบว์ผ้าชีฟอง</div>
+          <div class="product-price">฿79</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(76)</span></div>
+        </div>
+      </div>
+
+      <div class="product-card" style="animation-delay: 0.25s;">
+        <div class="product-img p4">
+          <span>🌸</span>
+          <span class="product-badge">NEW</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บดอกไม้</div>
+          <div class="product-price">฿69</div>
+          <div class="product-stars">★★★★☆ <span class="product-reviews">(65)</span></div>
+        </div>
+      </div>
+
+      <div class="product-card" style="animation-delay: 0.3s;">
+        <div class="product-img p5">
+          <span>💎</span>
+          <span class="product-badge">NEW</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บหัวใจแพชเชอร์</div>
+          <div class="product-price">฿69</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(54)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE PRODUCTS SECTION -->
+    <div class="section-header" style="margin-top: 28px;">
+      <div class="section-title">🔥 สินค้าขายดี</div>
+      <a href="#" class="see-all">ดูทั้งหมด →</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card" style="animation-delay: 0.35s;">
+        <div class="product-img" style="background: linear-gradient(135deg,#FEF9C3,#FDE68A);">
+          <span>👑</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">ที่คาดผมลายดาว</div>
+          <div class="product-price">฿89</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(201)</span></div>
+        </div>
+      </div>
+      <div class="product-card" style="animation-delay: 0.4s;">
+        <div class="product-img" style="background: linear-gradient(135deg,#E0F2FE,#BAE6FD);">
+          <span>🎀</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">โบว์ผ้าออร์แกนซ่า</div>
+          <div class="product-price">฿45</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(189)</span></div>
+        </div>
+      </div>
+      <div class="product-card" style="animation-delay: 0.45s;">
+        <div class="product-img" style="background: linear-gradient(135deg,#FCE7F3,#FBCFE8);">
+          <span>🌙</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บรูปพระจันทร์</div>
+          <div class="product-price">฿55</div>
+          <div class="product-stars">★★★★☆ <span class="product-reviews">(142)</span></div>
+        </div>
+      </div>
+      <div class="product-card" style="animation-delay: 0.5s;">
+        <div class="product-img" style="background: linear-gradient(135deg,#D1FAE5,#A7F3D0);">
+          <span>🐰</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บหูกระต่าย</div>
+          <div class="product-price">฿65</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(115)</span></div>
+        </div>
+      </div>
+      <div class="product-card" style="animation-delay: 0.55s;">
+        <div class="product-img" style="background: linear-gradient(135deg,#FEE2E2,#FECACA);">
+          <span>🌺</span>
+          <button class="product-add-btn" onclick="addToCart(this)">+</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">กิ๊บดอกกุหลาบ</div>
+          <div class="product-price">฿75</div>
+          <div class="product-stars">★★★★★ <span class="product-reviews">(98)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- CART -->
+    <div class="cart-widget">
+      <div class="cart-title">🛒 ตะกร้าสินค้า <span style="background:var(--pink-pale);color:var(--pink-dark);border-radius:10px;font-size:13px;padding:2px 10px;font-weight:500;">3</span></div>
+
+      <div id="cart-items">
+        <div class="cart-item" data-price="59">
+          <div class="cart-item-img c1">📎</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">กิ๊บติดผมไข่มุก</div>
+            <div class="cart-item-price">฿59</div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(this)">🗑️</button>
+        </div>
+
+        <div class="cart-item" data-price="39">
+          <div class="cart-item-img c2">🪢</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">ยางรัดผมผ้าซาติน</div>
+            <div class="cart-item-price">฿39</div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(this)">🗑️</button>
+        </div>
+
+        <div class="cart-item" data-price="79">
+          <div class="cart-item-img c3">🎀</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">กิ๊บโบว์ผ้าชีฟอง</div>
+            <div class="cart-item-price">฿79</div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(this)">🗑️</button>
+        </div>
+      </div>
+
+      <div class="cart-total">
+        <span>ราคารวม</span>
+        <strong id="total">฿177</strong>
+      </div>
+
+      <button class="btn-checkout">ไปยังหน้าชำระเงิน</button>
+      <button class="btn-view-cart">ดูตะกร้าสินค้า</button>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="reviews-widget">
+      <div class="widget-title">
+        รีวิวจากลูกค้า
+        <a href="#">ดูทั้งหมด ›</a>
+      </div>
+      <div id="review-display">
+        <div class="review-item">
+          <div class="review-img">👩</div>
+          <div class="review-content">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">น่ารักมากค่ะ คุณภาพดี ตรงปก ส่งไวมาก ประทับใจ</div>
+            <div class="review-author">โดย น้องฟ้า</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-nav">
+        <button class="review-nav-btn" onclick="changeReview(-1)">‹</button>
+        <button class="review-nav-btn" onclick="changeReview(1)">›</button>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-widget">
+      <div class="newsletter-title">รับข่าวสาร & โปรพิเศษ</div>
+      <div class="newsletter-input">
+        <input type="email" placeholder="ใส่อีเมลของคุณ">
+        <button>➤</button>
+      </div>
+      <div class="social-follow-label">ติดตามเราที่</div>
+      <div class="social-follow">
+        <a href="#" class="social-line" style="background:#00B900;">L</a>
+        <a href="#" class="social-fb" style="background:#1877F2;">f</a>
+        <a href="#" class="social-ig" style="background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">📷</a>
+        <a href="#" style="background:#000;">T</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateTotal() {
+    const items = document.querySelectorAll('#cart-items .cart-item');
+    let total = 0;
+    items.forEach(item => {
+      const price = parseInt(item.dataset.price);
+      const qty = parseInt(item.querySelector('.qty-num').textContent);
+      total += price * qty;
+    });
+    document.getElementById('total').textContent = '฿' + total;
+    document.querySelector('.cart-badge').textContent = items.length;
+    document.querySelector('.cart-title span:last-child').textContent = items.length;
+  }
+
+  function changeQty(btn, delta) {
+    const qtyEl = btn.parentElement.querySelector('.qty-num');
+    let qty = parseInt(qtyEl.textContent) + delta;
+    if (qty < 1) qty = 1;
+    qtyEl.textContent = qty;
+    updateTotal();
+  }
+
+  function removeItem(btn) {
+    const item = btn.closest('.cart-item');
+    item.style.animation = 'fadeOut 0.3s ease forwards';
+    setTimeout(() => { item.remove(); updateTotal(); }, 280);
+  }
+
+  const reviews = [
+    { emoji: '👩', text: 'น่ารักมากค่ะ คุณภาพดี ตรงปก ส่งไวมาก ประทับใจ', author: 'น้องฟ้า', stars: 5 },
+    { emoji: '👧', text: 'สวยมากเลยค่ะ ใส่แล้วน่ารักมาก สินค้าดีกว่าที่คิด', author: 'น้องมิ้ว', stars: 5 },
+    { emoji: '🧑', text: 'ซื้อเป็นของขวัญให้เพื่อน ชอบมากเลยค่ะ คุ้มมาก', author: 'คุณแพร', stars: 5 },
+    { emoji: '👩‍🦱', text: 'ผ้าดีมากค่ะ ไม่หัก ไม่ดึงผม ใส่สบาย สีสวย', author: 'น้องนุ่น', stars: 4 },
+  ];
+  let currentReview = 0;
+
+  function changeReview(dir) {
+    currentReview = (currentReview + dir + reviews.length) % reviews.length;
+    const r = reviews[currentReview];
+    document.getElementById('review-display').innerHTML = `
+      <div class="review-item">
+        <div class="review-img">${r.emoji}</div>
+        <div class="review-content">
+          <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+          <div class="review-text">${r.text}</div>
+          <div class="review-author">โดย ${r.author}</div>
+        </div>
+      </div>`;
+  }
+
+  // Slide dots interaction
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  });
+
+  // Add to cart animation
+  function addToCart(btn) {
+    btn.style.transform = 'scale(1.3)';
+    btn.textContent = '✓';
+    setTimeout(() => {
+      btn.style.transform = 'scale(1)';
+      btn.textContent = '+';
+    }, 600);
+  }
+
+  // Stagger product card animations
+  document.querySelectorAll('.product-card').forEach((card, i) => {
+    card.style.animationDelay = (0.1 + i * 0.05) + 's';
+  });
+</script>
+
+<style>
+  @keyframes fadeOut {
+    to { opacity: 0; transform: translateX(20px); height: 0; padding: 0; }
+  }
+</style>
+
+</body>
+</html>
